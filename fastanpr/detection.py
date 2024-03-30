@@ -1,7 +1,7 @@
 from pathlib import Path
 from ultralytics import YOLO
+from pydantic import BaseModel
 from typing import Union, List
-from pydantic import BaseModel, Field
 
 import numpy as np
 
