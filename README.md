@@ -118,6 +118,13 @@ else:
     print(f"Request failed with status code {response.status_code}.")
 ```
 
+## Docker
+Hosting a FastAPI server can also be done by building a docker file as from console:
+```bash
+docker build -t fastanpr-app .
+docker run -p 8000:8000 fastanpr-app
+```
+
 ## Licence
 This project incorporates the YOLOv8 model from Ultralytics, which is licensed under the AGPL-3.0 license. As such, this project is also distributed under the [GNU Affero General Public License v3.0 (AGPL-3.0)](LICENSE) to comply with the licensing requirements.
 
