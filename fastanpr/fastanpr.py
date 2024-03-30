@@ -46,11 +46,15 @@ class FastANPR:
                         offset_recog_poly = self._offset_recognition_poly(detection.box, recognition.poly)
                         image_results.append(
                             NumberPlate(
-                                detection.box, detection.conf, offset_recog_poly, recognition.text, recognition.conf
+                                det_box=detection.box,
+                                det_conf=detection.conf,
+                                rec_poly=offset_recog_poly,
+                                rec_text=recognition.text,
+                                rec_conf=recognition.conf
                             )
                         )
                     else:
-                        image_results.append(NumberPlate(detection.box, detection.conf))
+                        image_results.append(NumberPlate(det_box=detection.box, det_conf=detection.conf))
             results.append(image_results)
         return results
 
