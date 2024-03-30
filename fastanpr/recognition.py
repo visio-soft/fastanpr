@@ -1,13 +1,15 @@
 from paddleocr import PaddleOCR
-from dataclasses import dataclass
+from pydantic import BaseModel
 from typing import List, Tuple, Optional
 
 
-@dataclass(frozen=True)
-class Recognition:
+class Recognition(BaseModel):
     text: str
     poly: List[List[int]]
     conf: float
+
+    class Config:
+        frozen = True
 
 
 class Recogniser:
@@ -33,7 +35,7 @@ class Recogniser:
                 clean_poly = polys[0]
                 clean_text = _clean_text(texts[0])
                 clean_conf = confs[0]
-            return Recognition(clean_text, clean_poly, clean_conf)
+            return Recognition(text=clean_text, poly=clean_poly, conf=clean_conf)
         else:
             return None
 

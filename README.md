@@ -78,6 +78,52 @@ Runs ANPR on a list of images and return a list of detected number plates.
 - `rec_poly` (List[List[int]]): Polygon coordinates of detected texts.
 - `rec_conf` (float): Confidence score of recognition.
 
+## FastAPI
+To start a FastAPI server locally from your console:
+```bash
+uvicorn api:app
+```
+### Usage
+```python
+import base64
+import requests
+
+# Step 1: Read the image file
+image_path = 'tests/images/image001.jpg'
+with open(image_path, 'rb') as image_file:
+    image_data = image_file.read()
+
+# Step 2: Convert the image to a base64 encoded string
+base64_image_str = base64.b64encode(image_data).decode('utf-8')
+
+# Prepare the data for the POST request (assuming the API expects JSON)
+data = {'image': base64_image_str}
+
+# Step 3: Send a POST request
+response = requests.post(url='http://127.0.0.1:8000/recognise', json=data)
+
+# Check the response
+if response.status_code == 200:
+    # 'number_plates': [
+    #       {
+    #           'det_box': [682, 414, 779, 455], 
+    #           'det_conf': 0.29964497685432434, 
+    #           'rec_poly': [[688, 420], [775, 420], [775, 451], [688, 451]], 
+    #           'rec_text': 'BVH826', 
+    #           'rec_conf': 0.940690815448761
+    #       }
+    # ]
+    print(response.json())
+else:
+    print(f"Request failed with status code {response.status_code}.")
+```
+
+## Docker
+Hosting a FastAPI server can also be done by building a docker file as from console:
+```bash
+docker build -t fastanpr-app .
+docker run -p 8000:8000 fastanpr-app
+```
 
 ## Licence
 This project incorporates the YOLOv8 model from Ultralytics, which is licensed under the AGPL-3.0 license. As such, this project is also distributed under the [GNU Affero General Public License v3.0 (AGPL-3.0)](LICENSE) to comply with the licensing requirements.
