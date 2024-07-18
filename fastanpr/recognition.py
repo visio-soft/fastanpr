@@ -18,7 +18,7 @@ class Recogniser:
         self.model = PaddleOCR(
             use_angle_cls=False, lang='en',
             # ocr_version='PP-OCRv4',
-            rec_model_dir="/home/visio-ai/PycharmProjects/anpr_api/inference/en_PP-OCRv4_rec",
+            rec_model_dir="/path/to/inference/en_PP-OCRv4_rec",
             use_space_char=True,
             show_log=False,
             use_gpu=False if device == "cpu" else device,
