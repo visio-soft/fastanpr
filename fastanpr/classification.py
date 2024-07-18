@@ -30,4 +30,3 @@ if __name__ == '__main__':
 
     img=cv2.imread('filename.jpg')
     names= classifier.run([img])
-    print(names)
