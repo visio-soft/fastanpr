@@ -28,6 +28,6 @@ class Classifier:
 if __name__ == '__main__':
     classifier = Classifier(device='cuda:0')
 
-    img=cv2.imread('/anpr/images/20240717_151942_5620a310-e003-4b9a-95e2-d690ff430939.png')
+    img=cv2.imread('filename.jpg')
     names= classifier.run([img])
     print(names)
