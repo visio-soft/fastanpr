@@ -22,14 +22,17 @@ class Detector:
         self.model = YOLO(model=detection_model)
 
     def run(self, images: List[np.ndarray]) -> List[List[Detection]]:
-        predictions = self.model.predict(images, device=self.device, verbose=False)
+        det_preds = self.model.predict(images, device=self.device, verbose=False)
+
         results = []
-        for image, detection in zip(images, predictions):
+        for image, detection in zip(images, det_preds):
             image_detections = []
             if detection.boxes:
                 det_boxes = detection.boxes.cpu().data.numpy().astype(int).tolist()
                 det_confs = detection.boxes.cpu().conf.numpy().tolist()
                 for det_box, det_conf in zip(det_boxes, det_confs):
+                    det_box[0], det_box[2], det_box[1], det_box[3] = det_box[0] - 10, det_box[2] + 10, det_box[1] - 10, \
+                                                                     det_box[3] + 10
                     x_min, x_max, y_min, y_max = det_box[0], det_box[2], det_box[1], det_box[3]
                     image_detections.append(
                         Detection(image=image[y_min:y_max, x_min:x_max, :], box=det_box[:4], conf=det_conf)

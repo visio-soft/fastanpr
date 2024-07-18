@@ -9,14 +9,14 @@ from .numberplate import NumberPlate
 class FastANPR:
     def __init__(
             self,
-            detection_model: Union[str, Path] = Path(__file__).parent / 'best.pt',
+            detection_model: Union[str, Path] = Path(__file__).parent / 'detection_model.pt',
             device: str = "cpu"
     ):
         self.detector = Detector(detection_model=detection_model, device=device)
         self.recogniser = Recogniser(device=device)
         self.device = device
 
-    async def run(self, images: Union[np.ndarray, List[np.ndarray]]) -> List[List[NumberPlate]]:
+    def run(self, images: Union[np.ndarray, List[np.ndarray]]) -> List[List[NumberPlate]]:
         """Runs ANPR on a list of images and return a list of detected number plates."""
 
         # Images are expected to be numpy arrays of dimension 3 (HWC) or 4 (BHWC), or list of numpy arrays

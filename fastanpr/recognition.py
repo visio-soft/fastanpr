@@ -16,7 +16,12 @@ class Recogniser:
     def __init__(self, device: str):
         self.device = device
         self.model = PaddleOCR(
-            lang="en", use_angle_cls=True, show_log=False, use_gpu=False if device == "cpu" else device
+            use_angle_cls=False, lang='en',
+            # ocr_version='PP-OCRv4',
+            rec_model_dir="/home/visio-ai/PycharmProjects/anpr_api/inference/en_PP-OCRv4_rec",
+            use_space_char=True,
+            show_log=False,
+            use_gpu=False if device == "cpu" else device,
         )
 
     def run(self, image) -> Optional[Recognition]:
