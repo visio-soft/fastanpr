@@ -16,7 +16,7 @@ class FastANPR:
         self.recogniser = Recogniser(device=device)
         self.device = device
 
-    async def run(self, images: Union[np.ndarray, List[np.ndarray]]) -> List[List[NumberPlate]]:
+    def run(self, images: Union[np.ndarray, List[np.ndarray]]) -> List[List[NumberPlate]]:
         """Runs ANPR on a list of images and return a list of detected number plates."""
 
         # Images are expected to be numpy arrays of dimension 3 (HWC) or 4 (BHWC), or list of numpy arrays
@@ -50,7 +50,8 @@ class FastANPR:
                                 det_conf=detection.conf,
                                 rec_poly=offset_recog_poly,
                                 rec_text=recognition.text,
-                                rec_conf=recognition.conf
+                                rec_conf=recognition.conf,
+                                gate_pos=detection.gate_pos
                             )
                         )
                     else:

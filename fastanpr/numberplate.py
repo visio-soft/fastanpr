@@ -7,6 +7,7 @@ class NumberPlate(BaseModel):
     det_conf: float
     rec_poly: List[List[int]] = None
     rec_text: str = None
+    gate_pos: str = None
     rec_conf: float = None
 
     class Config:
