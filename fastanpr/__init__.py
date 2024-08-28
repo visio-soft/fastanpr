@@ -1,6 +1,6 @@
 from .version import __version__
-from .fastanpr import FastANPR, NumberPlate
-
+from .fastanpr import NumberPlate
+from .anpr_RT import FastANPR as anprRT
 __version__ = __version__
-FastANPR = FastANPR
+anpr_RT=anprRT
 NumberPlate = NumberPlate
