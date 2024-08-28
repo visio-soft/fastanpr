@@ -13,12 +13,12 @@ class Recognition(BaseModel):
 
 
 class Recogniser:
-    def __init__(self, device: str):
+    def __init__(self,rec_model:str, device: str):
         self.device = device
         self.model = PaddleOCR(
             use_angle_cls=False, lang='en',
             # ocr_version='PP-OCRv4',
-            rec_model_dir="/path/to/inference/en_PP-OCRv4_rec",
+            rec_model_dir=rec_model,
             use_space_char=True,
             show_log=False,
             use_gpu=False if device == "cpu" else device,
