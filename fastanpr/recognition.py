@@ -1,6 +1,7 @@
 from paddleocr import PaddleOCR
 from pydantic import BaseModel
-from typing import List, Tuple, Optional
+from typing import List, Tuple, Optional, Union
+from pathlib import Path
 
 
 class Recognition(BaseModel):
@@ -13,12 +14,12 @@ class Recognition(BaseModel):
 
 
 class Recogniser:
-    def __init__(self,rec_model:str, device: str):
+    def __init__(self,rec_model: Union[str, Path], device: str):
         self.device = device
         self.model = PaddleOCR(
             use_angle_cls=False, lang='en',
             # ocr_version='PP-OCRv4',
-            rec_model_dir=rec_model,
+            rec_model_dir=str(rec_model),
             use_space_char=True,
             show_log=False,
             use_gpu=False if device == "cpu" else device,
