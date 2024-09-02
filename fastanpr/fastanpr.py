@@ -9,11 +9,12 @@ from .numberplate import NumberPlate
 class FastANPR:
     def __init__(
             self,
-            detection_model: Union[str, Path] = Path(__file__).parent / 'best.pt',
+            detection_model: Union[str, Path] = Path(__file__).parent / 'models/detection_model.pt',
+            rec_model: Union[str, Path] = Path(__file__).parent / 'models/inference/en_PP-OCRv4_rec',
             device: str = "cpu"
     ):
         self.detector = Detector(detection_model=detection_model, device=device)
-        self.recogniser = Recogniser(device=device)
+        self.recogniser = Recogniser(rec_model=rec_model,device=device)
         self.device = device
 
     def run(self, images: Union[np.ndarray, List[np.ndarray]]) -> List[List[NumberPlate]]:
