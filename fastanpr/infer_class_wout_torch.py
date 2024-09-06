@@ -8,8 +8,8 @@ from tqdm import tqdm
 from typing import Union, List
 import cv2
 
-from yolo_rt.models.cudart_api import TRTEngine
-from yolo_rt.models.utils import blob, letterbox,det_postprocess
+from .yolo_rt.models.cudart_api import TRTEngine
+from .yolo_rt.models.utils import blob, letterbox,det_postprocess
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
