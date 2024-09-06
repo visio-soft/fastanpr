@@ -22,7 +22,7 @@ class Recogniser:
             rec_model_dir=str(rec_model),
             use_space_char=True,
             show_log=False,
-            use_gpu=False if device == "cpu" else device,
+            use_gpu=True,
         )
 
     def run(self, image) -> Optional[Recognition]:
