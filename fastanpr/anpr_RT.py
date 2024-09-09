@@ -3,6 +3,7 @@ from typing import Union, List
 from fastanpr.recognition import Recogniser
 from fastanpr.numberplate import NumberPlate
 from .infer_class_wout_torch import Detect_RT
+import numpy as np
 
 class FastANPR:
     def __init__(
