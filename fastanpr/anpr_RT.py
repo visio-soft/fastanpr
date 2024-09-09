@@ -9,12 +9,14 @@ class FastANPR:
     def __init__(
             self,
             detection_model: Union[str, Path] = Path(__file__).parent / 'models/detection_model.engine',
+            rec_model: Union[str, Path] = Path(__file__).parent / 'models/inference/en_PP-OCRv4_rec',
             device: str = "cpu"
     ):
         # self.detector = Detector(detection_model=detection_model, device=device)
         self.detector = Detect_RT(model_path=detection_model)
-        self.recogniser = Recogniser(device=device)
+        self.recogniser = Recogniser(rec_model=rec_model,device=device)
         self.device = device
+
 
     def run(self, images: Union[np.ndarray, List[np.ndarray]]) -> List[List[NumberPlate]]:
         """Runs ANPR on a list of images and return a list of detected number plates."""
